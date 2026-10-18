@@ -1,0 +1,2871 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alif Yeasin Jim — Portfolio</title>
+  <link rel="icon" type="image/png" href="image/favicon-round.png?v=1" />
+  <link rel="apple-touch-icon" type="image/png" href="image/favicon-round.png?v=1" />
+
+  <!-- Modern Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Inter"', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+            },
+            accent: {
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+            },
+            darkBg: '#090d16',
+            darkSurface: '#0f172a',
+            darkCard: '#131d35',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Modern Portfolio Styles */
+    :root {
+      --bg-main: #f8fafc;
+      --bg-surface: #ffffff;
+      --border-subtle: #e2e8f0;
+      --text-heading: #0f172a;
+      --text-muted: #64748b;
+      --card-hover: rgba(255, 255, 255, 0.95);
+      --glass-nav: rgba(255, 255, 255, 0.8);
+      --glow-color: rgba(6, 182, 212, 0.08);
+    }
+
+    .dark {
+      --bg-main: #090d16;
+      --bg-surface: #0f172a;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --text-heading: #f8fafc;
+      --text-muted: #94a3b8;
+      --card-hover: rgba(19, 29, 53, 0.9);
+      --glass-nav: rgba(9, 13, 22, 0.85);
+      --glow-color: rgba(6, 182, 212, 0.12);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-heading);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+      overflow-x: hidden;
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      background-position: center top;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.75;
+      background: radial-gradient(520px circle at var(--pointer-x, 50%) var(--pointer-y, 20%), rgba(6, 182, 212, 0.09), transparent 68%);
+      transition: background 0.15s ease-out;
+    }
+
+    main, footer, header { position: relative; }
+    section { scroll-margin-top: 6rem; }
+    main > section:nth-child(even) {
+      background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.12), transparent);
+    }
+    .dark main > section:nth-child(even) {
+      background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.24), transparent);
+    }
+
+    .glassmorphism {
+      background: var(--glass-nav);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 12px 40px rgba(2, 8, 23, 0.08);
+    }
+
+    header .glassmorphism {
+      background: linear-gradient(120deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.62));
+      border-color: rgba(148, 163, 184, 0.16);
+    }
+
+    header nav a {
+      position: relative;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    header nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #22d3ee, #818cf8);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease;
+    }
+
+    header nav a:hover {
+      transform: translateY(-2px);
+    }
+
+    header nav a:hover::after,
+    header nav a.is-active::after {
+      transform: scaleX(1);
+    }
+
+    .card-modern {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .card-modern::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: -1;
+      opacity: 0;
+      background: linear-gradient(120deg, rgba(249, 115, 22, 0.12), transparent 42%, rgba(251, 191, 36, 0.1));
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .card-modern:hover {
+      border-color: rgba(249, 115, 22, 0.45);
+      transform: translateY(-7px);
+      box-shadow: 0 18px 38px -16px var(--glow-color), 0 0 0 1px rgba(249, 115, 22, 0.1);
+    }
+
+    .card-modern:hover::after { opacity: 1; }
+
+    .card-modern h3,
+    .card-modern h4 {
+      letter-spacing: -0.025em;
+    }
+
+    section > .text-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 2.75rem;
+    }
+
+    section > .text-left > span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.35rem;
+    }
+
+    section > .text-left > span::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: #f97316;
+      border-radius: 999px;
+      opacity: 0.85;
+    }
+
+    section > .text-left h2 {
+      position: relative;
+      display: block;
+      letter-spacing: -0.04em;
+      margin-top: 0;
+    }
+
+    section > .text-left h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      margin-top: 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f97316, #fbbf24, transparent);
+      box-shadow: 0 0 12px rgba(249, 115, 22, 0.4);
+    }
+
+    a[class*="bg-gradient-to-r"],
+    button[type="submit"] {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    a[class*="bg-gradient-to-r"]::before,
+    button[type="submit"]::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.3) 50%, transparent 80%);
+      transform: translateX(-120%);
+      transition: transform 0.7s ease;
+    }
+
+    a[class*="bg-gradient-to-r"]:hover::before,
+    button[type="submit"]:hover::before {
+      transform: translateX(120%);
+    }
+
+    .card-modern input,
+    .card-modern textarea {
+      box-shadow: inset 0 1px 1px rgba(15, 23, 42, 0.05);
+    }
+
+    .card-modern input:focus,
+    .card-modern textarea:focus {
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.12), inset 0 1px 1px rgba(15, 23, 42, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .card-modern [style*="width"] {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 14px currentColor;
+    }
+
+    .card-modern [style*="width"]::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+      transform: translateX(-100%);
+      animation: progressShine 3s ease-in-out infinite;
+    }
+
+    .hero-orbit {
+      opacity: 0.8;
+      filter: drop-shadow(0 0 14px rgba(34, 211, 238, 0.12));
+    }
+
+    #research .card-modern,
+    #education .card-modern {
+      background: linear-gradient(145deg, var(--bg-surface), rgba(15, 23, 42, 0.72));
+    }
+
+    #research .card-modern:hover,
+    #education .card-modern:hover {
+      transform: translateY(-9px) scale(1.01);
+    }
+
+    #researchModal > div {
+      box-shadow: 0 30px 90px rgba(2, 8, 23, 0.42), 0 0 0 1px rgba(34, 211, 238, 0.12);
+    }
+
+    footer a {
+      position: relative;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    footer a:hover { transform: translateY(-2px); }
+
+    @keyframes progressShine {
+      0%, 35% { transform: translateX(-100%); }
+      70%, 100% { transform: translateX(100%); }
+    }
+
+    .mesh-glow-1, .mesh-glow-2 {
+      animation: driftGlow 14s ease-in-out infinite alternate;
+    }
+
+    .mesh-glow-2 { animation-delay: -6s; }
+
+    .hero-orbit {
+      position: absolute;
+      width: 115%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(34, 211, 238, 0.16);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: orbitSpin 24s linear infinite;
+    }
+
+    .hero-orbit::before, .hero-orbit::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22d3ee;
+      box-shadow: 0 0 20px 5px rgba(34, 211, 238, 0.55);
+    }
+
+    .hero-orbit::before { top: 12%; left: 16%; }
+    .hero-orbit::after { right: 7%; bottom: 22%; background: #818cf8; }
+
+    .float-slow { animation: floatSlow 6s ease-in-out infinite; }
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal.reveal-left { transform: translateX(-28px); }
+    .reveal.reveal-left.is-visible { transform: translateX(0); }
+
+    .particle {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(34, 211, 238, 0.55);
+      pointer-events: none;
+      z-index: 0;
+      animation: particleFloat var(--particle-duration) ease-in-out infinite alternate;
+      animation-delay: var(--particle-delay);
+    }
+
+    .nav-scrolled > div {
+      box-shadow: 0 14px 35px rgba(2, 8, 23, 0.16);
+      border-color: rgba(6, 182, 212, 0.22);
+    }
+
+    @keyframes driftGlow {
+      0% { transform: translate3d(-3%, -2%, 0) scale(0.94); }
+      100% { transform: translate3d(5%, 4%, 0) scale(1.08); }
+    }
+
+    @keyframes orbitSpin { to { transform: rotate(360deg); } }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(0.5deg); }
+    }
+
+    @keyframes particleFloat {
+      0% { transform: translate3d(0, 0, 0); opacity: 0.2; }
+      100% { transform: translate3d(var(--particle-x), var(--particle-y), 0); opacity: 0.8; }
+    }
+
+    @media (max-width: 640px) {
+      .mesh-glow-1 { width: 280px; height: 280px; left: -18%; }
+      .mesh-glow-2 { width: 320px; height: 320px; right: -20%; }
+      .glassmorphism { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+      section { scroll-margin-top: 5rem; }
+      .reveal.reveal-left { transform: translateY(26px); }
+      .reveal.reveal-left.is-visible { transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal, .reveal.reveal-left { opacity: 1; transform: none; }
+      body::before { display: none; }
+    }
+
+    .gradient-text {
+      background: linear-gradient(110deg, #22d3ee 0%, #6366f1 48%, #f472b6 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientFlow 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes gradientFlow {
+      from { background-position: 0% center; }
+      to { background-position: 100% center; }
+    }
+
+    /* Ambient background gradient meshes */
+    .mesh-glow-1 {
+      position: absolute;
+      top: 5%;
+      left: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .mesh-glow-2 {
+      position: absolute;
+      top: 30%;
+      right: 5%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+      filter: blur(110px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-main); }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.25); border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.5); }
+
+    /* Aurora redesign */
+    :root {
+      --bg-main: #080511;
+      --bg-surface: rgba(22, 14, 42, 0.82);
+      --border-subtle: rgba(216, 180, 254, 0.16);
+      --text-heading: #fff7ff;
+      --text-muted: #b9a9c8;
+      --glass-nav: rgba(13, 8, 28, 0.72);
+      --glow-color: rgba(217, 70, 239, 0.25);
+    }
+
+    .dark {
+      --bg-main: #080511;
+      --bg-surface: rgba(22, 14, 42, 0.82);
+      --border-subtle: rgba(216, 180, 254, 0.16);
+      --text-heading: #fff7ff;
+      --text-muted: #b9a9c8;
+      --glass-nav: rgba(13, 8, 28, 0.72);
+      --glow-color: rgba(217, 70, 239, 0.25);
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse at 10% 0%, rgba(126, 34, 206, 0.22), transparent 38%),
+        radial-gradient(ellipse at 95% 20%, rgba(225, 29, 72, 0.13), transparent 34%),
+        var(--bg-main);
+      background-image:
+        linear-gradient(rgba(216, 180, 254, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(216, 180, 254, 0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+    }
+
+    body::before {
+      background: radial-gradient(600px circle at var(--pointer-x, 50%) var(--pointer-y, 20%), rgba(217, 70, 239, 0.15), transparent 68%);
+    }
+
+    header .glassmorphism {
+      background: linear-gradient(105deg, rgba(23, 12, 45, 0.94), rgba(45, 12, 50, 0.72));
+      border-color: rgba(244, 114, 182, 0.24);
+      box-shadow: 0 16px 55px rgba(2, 1, 10, 0.42), inset 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    header nav a::after {
+      background: linear-gradient(90deg, #f472b6, #c084fc, #fb923c);
+      box-shadow: 0 0 12px rgba(244, 114, 182, 0.8);
+    }
+
+    .card-modern {
+      background: linear-gradient(145deg, rgba(30, 18, 54, 0.92), rgba(15, 9, 30, 0.78));
+      border-color: rgba(216, 180, 254, 0.18);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.045), 0 14px 45px rgba(2, 1, 10, 0.2);
+    }
+
+    .card-modern::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: conic-gradient(from 180deg at 50% 50%, transparent 0deg, rgba(217, 70, 239, 0.25) 80deg, transparent 150deg, rgba(251, 146, 60, 0.2) 230deg, transparent 310deg);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      animation: cardAurora 8s linear infinite;
+    }
+
+    .card-modern:hover {
+      border-color: rgba(244, 114, 182, 0.55);
+      box-shadow: 0 24px 55px -18px rgba(217, 70, 239, 0.48), 0 0 0 1px rgba(244, 114, 182, 0.12);
+    }
+
+    .card-modern:hover::before { opacity: 1; }
+
+
+    /* Refined, Human Editorial Warm Amber Theme */
+    :root,
+    .dark {
+      --bg-main: #0b0f17;
+      --bg-surface: #131822;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --text-heading: #f8fafc;
+      --text-muted: #94a3b8;
+      --glass-nav: rgba(14, 18, 26, 0.9);
+      --glow-color: rgba(245, 158, 11, 0.08);
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse at 10% 0%, rgba(245, 158, 11, 0.07), transparent 40%),
+        radial-gradient(ellipse at 90% 25%, rgba(234, 88, 12, 0.05), transparent 35%),
+        #0b0f17;
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    body::before {
+      background: radial-gradient(560px circle at var(--pointer-x, 50%) var(--pointer-y, 20%), rgba(245, 158, 11, 0.06), transparent 68%);
+    }
+
+    header .glassmorphism {
+      background: rgba(15, 20, 30, 0.88);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    header nav a::after {
+      background: linear-gradient(90deg, #f59e0b, #ea580c);
+      box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+    }
+
+    .card-modern {
+      background: #131822;
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 14px 34px -4px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-modern:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+      box-shadow: 0 20px 42px -6px rgba(0, 0, 0, 0.5);
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #f59e0b, #fbbf24 60%, #ea580c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: none !important;
+    }
+
+    .mesh-glow-1,
+    .mesh-glow-2 {
+      display: none !important;
+    }
+
+    .hero-orbit {
+      display: none !important;
+    }
+
+    section > .text-left h2::after {
+      display: none !important;
+    }
+
+    a[class*="from-brand-500"],
+    button[type="submit"] {
+      background-image: linear-gradient(110deg, #d97706, #ea580c) !important;
+      box-shadow: 0 8px 22px rgba(217, 119, 6, 0.25) !important;
+    }
+
+    .bg-brand-500 { background-color: #d97706 !important; }
+    .text-brand-500, .text-brand-600, .dark\:text-brand-400 { color: #f59e0b !important; }
+    .border-brand-500 { border-color: rgba(245, 158, 11, 0.4) !important; }
+    .text-accent-400 { color: #fbbf24 !important; }
+    .bg-accent-500 { background-color: #d97706 !important; }
+    .selection\:bg-brand-500::selection { background: #d97706 !important; }
+
+    /* Light mode: clean editorial aesthetic with gentle amber warmth and crisp black drop shadows */
+    html:not(.dark) body {
+      --bg-main: #edf2f7;
+      --bg-surface: #ffffff;
+      --border-subtle: rgba(0, 0, 0, 0.09);
+      --text-heading: #0f172a;
+      --text-muted: #475569;
+      --glass-nav: rgba(255, 255, 255, 0.95);
+      --glow-color: rgba(245, 158, 11, 0.05);
+      background:
+        radial-gradient(ellipse at 8% 0%, rgba(245, 158, 11, 0.05), transparent 40%),
+        radial-gradient(ellipse at 94% 25%, rgba(234, 88, 12, 0.04), transparent 35%),
+        #edf2f7;
+      background-image:
+        linear-gradient(rgba(100, 116, 139, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100, 116, 139, 0.07) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    html:not(.dark) body::before {
+      background: radial-gradient(560px circle at var(--pointer-x, 50%) var(--pointer-y, 20%), rgba(245, 158, 11, 0.05), transparent 68%);
+    }
+
+    html:not(.dark) header .glassmorphism {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    html:not(.dark) .glassmorphism {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      box-shadow: 0 12px 30px -3px rgba(0, 0, 0, 0.12);
+    }
+
+    html:not(.dark) .card-modern {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.09) !important;
+      box-shadow: 0 14px 34px -4px rgba(0, 0, 0, 0.18), 0 4px 14px -2px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    html:not(.dark) .card-modern:hover {
+      border-color: #d97706 !important;
+      box-shadow: 0 22px 46px -6px rgba(0, 0, 0, 0.22), 0 8px 18px -4px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(217, 119, 6, 0.35) !important;
+    }
+
+    html:not(.dark) .text-slate-900,
+    html:not(.dark) .dark\:text-white {
+      color: #0f172a !important;
+    }
+
+    html:not(.dark) .text-slate-700,
+    html:not(.dark) .dark\:text-slate-200 {
+      color: #334155 !important;
+    }
+
+    html:not(.dark) .text-slate-600,
+    html:not(.dark) .text-slate-500,
+    html:not(.dark) .text-slate-400 {
+      color: #475569 !important;
+    }
+
+    html:not(.dark) .text-brand-500,
+    html:not(.dark) .text-brand-600,
+    html:not(.dark) .dark\:text-brand-400 {
+      color: #d97706 !important;
+    }
+
+    html:not(.dark) .border-brand-500 {
+      border-color: #d97706 !important;
+    }
+
+    html:not(.dark) .text-amber-400,
+    html:not(.dark) .text-amber-500 {
+      color: #b45309 !important;
+    }
+
+    html:not(.dark) .text-amber-300 {
+      color: #92400e !important;
+    }
+
+    html:not(.dark) .text-orange-400,
+    html:not(.dark) .text-orange-300 {
+      color: #c2410c !important;
+    }
+
+    html:not(.dark) .border-white\/5,
+    html:not(.dark) .dark\:border-white\/5 {
+      border-color: #e2e8f0 !important;
+    }
+
+    html:not(.dark) .bg-amber-950\/20,
+    html:not(.dark) .bg-amber-950\/25,
+    html:not(.dark) .bg-amber-950\/30 {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    html:not(.dark) .dark\:bg-slate-900 {
+      background-color: #f8fafc !important;
+    }
+
+    html:not(.dark) .dark\:bg-slate-800,
+    html:not(.dark) .dark\:bg-slate-800\/40 {
+      background-color: #f1f5f9 !important;
+    }
+
+    html:not(.dark) .dark\:border-slate-800,
+    html:not(.dark) .dark\:border-slate-800\/80 {
+      border-color: #e2e8f0 !important;
+    }
+
+    html:not(.dark) .bg-slate-100\/70 {
+      background-color: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      box-shadow: 0 10px 24px -3px rgba(0, 0, 0, 0.15), 0 3px 8px -1px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    html:not(.dark) .bg-amber-500\/10,
+    html:not(.dark) .bg-brand-500\/10 {
+      background-color: #fef3c7 !important;
+      border-color: #fde68a !important;
+      color: #b45309 !important;
+    }
+
+    html:not(.dark) input,
+    html:not(.dark) textarea {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    html:not(.dark) input:focus,
+    html:not(.dark) textarea:focus {
+      border-color: #d97706 !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08), 0 0 0 3px rgba(217, 119, 6, 0.15) !important;
+    }
+
+    html:not(.dark) .nav-scrolled > div {
+      border-color: rgba(217, 119, 6, 0.25);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ===================================================
+       ABOUT & ACADEMIC PHILOSOPHY (Warm Amber Bento)
+       =================================================== */
+    #about {
+      position: relative;
+    }
+
+    #about .story-card {
+      position: relative;
+      background: #131822;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.5rem;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    #about .story-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    #about .story-card:hover {
+      border-color: rgba(245, 158, 11, 0.45);
+      box-shadow: 0 22px 48px -10px rgba(0, 0, 0, 0.65);
+    }
+
+    #about .story-card:hover::before {
+      opacity: 1;
+    }
+
+    html:not(.dark) #about .story-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      box-shadow: 0 16px 38px -4px rgba(0, 0, 0, 0.18), 0 6px 16px -2px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    html:not(.dark) #about .story-card::before {
+      background: linear-gradient(90deg, transparent, #d97706, transparent);
+    }
+
+    html:not(.dark) #about .story-card:hover {
+      border-color: #d97706 !important;
+      box-shadow: 0 24px 48px -6px rgba(0, 0, 0, 0.22), 0 8px 20px -4px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(217, 119, 6, 0.35) !important;
+    }
+
+    html:not(.dark) #about .story-card .grid > div {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.09) !important;
+      box-shadow: 0 6px 18px -2px rgba(0, 0, 0, 0.13), 0 2px 6px -1px rgba(0, 0, 0, 0.07), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    #about .strength-card {
+      position: relative;
+      background: #131822;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.25rem;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    #about .strength-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    #about .strength-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 158, 11, 0.45);
+      box-shadow: 0 18px 36px -8px rgba(0, 0, 0, 0.6);
+    }
+
+    #about .strength-card:hover::before {
+      opacity: 1;
+    }
+
+    html:not(.dark) #about .strength-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      box-shadow: 0 12px 28px -3px rgba(0, 0, 0, 0.16), 0 4px 12px -2px rgba(0, 0, 0, 0.09), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    html:not(.dark) #about .strength-card::before {
+      background: linear-gradient(90deg, transparent, #d97706, transparent);
+    }
+
+    html:not(.dark) #about .strength-card:hover {
+      border-color: #d97706 !important;
+      box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.22), 0 6px 16px -3px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(217, 119, 6, 0.35) !important;
+    }
+
+    html:not(.dark) #about .strength-card .w-12 {
+      background: #fef3c7 !important;
+      border: 1px solid #fde68a !important;
+      color: #b45309 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    html:not(.dark) #about .strength-card:hover .w-12 {
+      background: #fde68a !important;
+      border-color: #f59e0b !important;
+      color: #92400e !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* ===================================================
+       EDUCATION & TRAJECTORY (Warm Amber Bento Timeline)
+       =================================================== */
+    #education {
+      position: relative;
+    }
+
+    #education .timeline-container {
+      position: relative;
+      padding-left: clamp(1.25rem, 4vw, 3rem);
+    }
+
+    #education .timeline-container::before {
+      content: "";
+      position: absolute;
+      left: clamp(0.5rem, 2vw, 1.25rem);
+      top: 2rem;
+      bottom: 2rem;
+      width: 2px;
+      background: linear-gradient(180deg, #f97316 0%, #fbbf24 60%, rgba(249, 115, 22, 0.2) 100%);
+      box-shadow: 0 0 14px rgba(249, 115, 22, 0.6);
+      border-radius: 999px;
+    }
+
+    #education .education-card {
+      position: relative;
+      background: #131822;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.5rem;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    #education .education-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    #education .education-card::before {
+      content: "";
+      position: absolute;
+      left: calc(-1 * clamp(1.25rem, 4vw, 3rem) + clamp(0.5rem, 2vw, 1.25rem) - 7px);
+      top: 2rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #f59e0b;
+      border: 3px solid #0b0f17;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+
+    #education .education-card:hover {
+      transform: translateX(6px);
+      border-color: rgba(245, 158, 11, 0.45);
+      box-shadow: 0 20px 44px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    #education .education-card:hover::after {
+      opacity: 1;
+    }
+
+    #education .education-card:hover::before {
+      transform: scale(1.2);
+      background: #fbbf24;
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.35);
+    }
+
+    html:not(.dark) #education .education-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      box-shadow: 0 16px 38px -4px rgba(0, 0, 0, 0.18), 0 6px 16px -2px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    html:not(.dark) #education .education-card::after {
+      background: linear-gradient(90deg, transparent, #d97706, transparent);
+    }
+
+    html:not(.dark) #education .education-card:hover {
+      border-color: #d97706 !important;
+      box-shadow: 0 24px 48px -6px rgba(0, 0, 0, 0.22), 0 8px 20px -4px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(217, 119, 6, 0.35) !important;
+    }
+
+    html:not(.dark) #education .timeline-container::before {
+      background: linear-gradient(180deg, #d97706 0%, #f59e0b 60%, rgba(217, 119, 6, 0.2) 100%);
+      box-shadow: none;
+    }
+
+    html:not(.dark) #education .education-card::before {
+      background: #d97706;
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    html:not(.dark) #education .education-card:hover::before {
+      background: #f59e0b;
+      box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.25);
+    }
+
+    /* ===================================================
+       SKILLS & COMPETENCIES (Clean Academic Cards)
+       =================================================== */
+    #skills {
+      position: relative;
+    }
+
+    #skills .skill-card {
+      position: relative;
+      background: #131822;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.15rem;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    #skills .skill-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    #skills .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 158, 11, 0.45);
+      box-shadow: 0 16px 34px -8px rgba(0, 0, 0, 0.6);
+    }
+
+    #skills .skill-card:hover::before {
+      opacity: 1;
+    }
+
+    html:not(.dark) #skills .skill-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      box-shadow: 0 12px 28px -3px rgba(0, 0, 0, 0.16), 0 4px 12px -2px rgba(0, 0, 0, 0.09), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    html:not(.dark) #skills .skill-card::before {
+      background: linear-gradient(90deg, transparent, #d97706, transparent);
+    }
+
+    html:not(.dark) #skills .skill-card:hover {
+      border-color: #d97706 !important;
+      box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.22), 0 6px 16px -3px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(217, 119, 6, 0.35) !important;
+      transform: translateY(-4px);
+    }
+
+    #skills .skill-icon-box {
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 0.65rem;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      color: #f59e0b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    html:not(.dark) #skills .skill-icon-box {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #b45309;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    #skills .skill-card:hover .skill-icon-box {
+      transform: scale(1.06);
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+    }
+
+    html:not(.dark) #skills .skill-card:hover .skill-icon-box {
+      background: #fde68a;
+      border-color: #f59e0b;
+      color: #92400e;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    #skills .skill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #f59e0b;
+    }
+
+    html:not(.dark) #skills .skill-badge {
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #92400e;
+    }
+
+    .skill-pill {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 500;
+      padding: 0.15rem 0.45rem;
+      border-radius: 0.35rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      letter-spacing: 0.01em;
+      transition: all 0.2s ease;
+    }
+
+    .skill-card:hover .skill-pill,
+    .education-card:hover .skill-pill {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.25);
+      color: #fcd34d;
+    }
+
+    html:not(.dark) .skill-pill {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      font-weight: 500;
+    }
+
+    html:not(.dark) .skill-card:hover .skill-pill,
+    html:not(.dark) .education-card:hover .skill-pill {
+      background: #fef3c7;
+      border-color: #fde68a;
+      color: #92400e;
+    }
+
+    #skills .skill-progress-bar {
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      padding: 0;
+    }
+
+    html:not(.dark) #skills .skill-progress-bar {
+      background: #ffedd5;
+      border: 1px solid #fed7aa;
+    }
+
+    #skills .skill-progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ea580c, #f97316 60%, #fbbf24) !important;
+      box-shadow: 0 0 10px rgba(249, 115, 22, 0.7);
+      transition: width 1s ease-out;
+    }
+
+    html:not(.dark) #skills .skill-progress-fill {
+      background: linear-gradient(90deg, #ea580c, #f97316 65%, #f59e0b) !important;
+      box-shadow: 0 0 10px rgba(234, 88, 12, 0.45);
+    }
+
+    /* ===================================================
+       FEATURED RESEARCH & WORKS (Signature Dossier Cards)
+       =================================================== */
+    #research {
+      position: relative;
+    }
+
+    #research .research-card {
+      position: relative;
+      background: #131822;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.5rem;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    #research .research-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    #research .research-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245, 158, 11, 0.45);
+      box-shadow: 0 20px 44px -10px rgba(0, 0, 0, 0.65);
+    }
+
+    #research .research-card:hover::before {
+      opacity: 1;
+    }
+
+    html:not(.dark) #research .research-card {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+      box-shadow: 0 16px 38px -4px rgba(0, 0, 0, 0.18), 0 6px 16px -2px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    html:not(.dark) #research .research-card::before {
+      background: linear-gradient(90deg, transparent, #d97706, transparent);
+    }
+
+    html:not(.dark) #research .research-card:hover {
+      border-color: #d97706 !important;
+      box-shadow: 0 24px 48px -6px rgba(0, 0, 0, 0.22), 0 8px 20px -4px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(217, 119, 6, 0.35) !important;
+    }
+
+    html:not(.dark) #research .dossier-banner {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    html:not(.dark) #research .dossier-banner span.font-mono {
+      background: #ffffff !important;
+      color: #b45309 !important;
+      border: 1px solid rgba(0, 0, 0, 0.09) !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    html:not(.dark) #research .banner-icon {
+      background: #ffffff !important;
+      color: #d97706 !important;
+      border: 1px solid rgba(0, 0, 0, 0.09) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    html:not(.dark) #research .research-card:hover .banner-icon {
+      background: #fef3c7 !important;
+      color: #92400e !important;
+      border-color: #f59e0b !important;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    #research .dossier-banner {
+      position: relative;
+      height: 9.5rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    #research .dossier-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(249, 115, 22, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249, 115, 22, 0.08) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+
+    #research .research-card:hover .dossier-banner .banner-icon {
+      transform: scale(1.12);
+      box-shadow: 0 0 28px rgba(249, 115, 22, 0.6);
+      border-color: rgba(249, 115, 22, 0.6);
+    }
+
+    @media (max-width: 640px) {
+      #education .timeline-container {
+        padding-left: 1.25rem;
+      }
+      #education .timeline-container::before {
+        left: 0.25rem;
+      }
+      #education .education-card::before {
+        left: -1.45rem;
+      }
+    }
+
+    /* ===================================================
+       INTERACTIVE MOUSE CURSOR FOLLOWER ANIMATION
+       =================================================== */
+    .custom-cursor-dot,
+    .custom-cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease;
+      will-change: transform;
+    }
+
+    .custom-cursor-dot {
+      width: 7px;
+      height: 7px;
+      background: #f59e0b;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+      transform: translate(-50%, -50%);
+    }
+
+    .custom-cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(245, 158, 11, 0.55);
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.02) 65%, transparent 75%);
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.2);
+      transform: translate(-50%, -50%);
+    }
+
+    /* Light Mode Cursor Styling */
+    html:not(.dark) .custom-cursor-dot {
+      background: #d97706;
+      box-shadow: 0 0 8px rgba(217, 119, 6, 0.6);
+    }
+
+    html:not(.dark) .custom-cursor-ring {
+      border: 1.5px solid rgba(217, 119, 6, 0.65);
+      background: radial-gradient(circle, rgba(217, 119, 6, 0.14) 0%, rgba(217, 119, 6, 0.02) 65%, transparent 75%);
+      box-shadow: 0 0 14px rgba(217, 119, 6, 0.18);
+    }
+
+    /* Interactive Hover Expansion */
+    body.cursor-hover .custom-cursor-ring {
+      width: 52px;
+      height: 52px;
+      border-color: #f59e0b;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.22) 0%, rgba(245, 158, 11, 0.05) 70%, transparent 80%);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+    }
+
+    html:not(.dark) body.cursor-hover .custom-cursor-ring {
+      border-color: #d97706;
+      background: radial-gradient(circle, rgba(217, 119, 6, 0.2) 0%, rgba(217, 119, 6, 0.04) 70%, transparent 80%);
+      box-shadow: 0 0 16px rgba(217, 119, 6, 0.28);
+    }
+
+    body.cursor-hover .custom-cursor-dot {
+      transform: translate(-50%, -50%) scale(0.6);
+      opacity: 0.8;
+    }
+
+    /* Click Active Compression */
+    body.cursor-active .custom-cursor-ring {
+      transform: translate(-50%, -50%) scale(0.85);
+    }
+
+    /* Touch / Mobile: Disable cleanly */
+    @media (hover: none), (pointer: coarse) {
+      .custom-cursor-dot,
+      .custom-cursor-ring {
+        display: none !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body class="selection:bg-brand-500 selection:text-white">
+
+  <!-- Interactive Mouse Cursor Follower Animation -->
+  <div id="cursorDot" class="custom-cursor-dot" aria-hidden="true"></div>
+  <div id="cursorRing" class="custom-cursor-ring" aria-hidden="true"></div>
+
+  <!-- Ambient Glow Meshes -->
+  <div class="mesh-glow-1"></div>
+  <div class="mesh-glow-2"></div>
+
+  <!-- Toast Notification Hub -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 glassmorphism px-5 py-3.5 rounded-2xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-300 shadow-2xl">
+    <div class="w-8 h-8 rounded-xl bg-brand-500 text-white flex items-center justify-center text-xs shrink-0">
+      <i class="fa-solid fa-check"></i>
+    </div>
+    <span id="toastMsg" class="text-xs font-medium text-slate-800 dark:text-slate-200">Information copied!</span>
+  </div>
+
+  <!-- FLOATING NAVIGATION BAR -->
+  <header class="fixed top-3 left-0 right-0 z-40 px-2 sm:px-4 transition-all duration-300">
+    <div class="w-full flex items-center justify-between glassmorphism px-3 sm:px-5 py-2 rounded-2xl sm:rounded-full shadow-sm">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-2 group">
+        <img src="image/image1.jpg" alt="Alif Yeasin Jim" class="w-9 h-9 rounded-full object-cover ring-2 ring-brand-500/40 shadow-md group-hover:scale-105 group-hover:ring-brand-400 transition-all" />
+        <span class="font-bold text-sm tracking-tight text-slate-900 dark:text-white hidden sm:inline-block">
+          Alif Yeasin Jim
+        </span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="hidden md:flex items-center gap-7 text-xs font-semibold tracking-wide text-slate-600 dark:text-slate-300">
+        <a href="#about" class="hover:text-brand-500 transition-colors">About</a>
+        <a href="#education" class="hover:text-brand-500 transition-colors">Education</a>
+        <a href="#skills" class="hover:text-brand-500 transition-colors">Skills</a>
+        <a href="#research" class="hover:text-brand-500 transition-colors">Research & Works</a>
+        <a href="#contact" class="hover:text-brand-500 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Action items -->
+      <div class="flex items-center gap-2.5">
+        <!-- Theme Switcher -->
+        <button onclick="toggleTheme()" class="w-8 h-8 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-brand-500 hover:border-brand-500/50 transition-all" title="Toggle Theme">
+          <i id="themeIcon" class="fa-solid fa-moon text-xs"></i>
+        </button>
+
+        <!-- Primary CTA -->
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold text-white bg-slate-900 dark:bg-white dark:text-slate-900 hover:opacity-90 transition-all shadow-sm">
+          <span>Get in Touch</span>
+          <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button onclick="toggleMobileMenu()" class="md:hidden w-9 h-9 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
+          <i class="fa-solid fa-bars text-xs"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden w-full mt-2 glassmorphism rounded-2xl p-5 flex flex-col gap-3 text-xs font-semibold">
+      <a href="#about" onclick="toggleMobileMenu()" class="py-2 hover:text-brand-500 border-b border-slate-200 dark:border-slate-800/80">About</a>
+      <a href="#education" onclick="toggleMobileMenu()" class="py-2 hover:text-brand-500 border-b border-slate-200 dark:border-slate-800/80">Education</a>
+      <a href="#skills" onclick="toggleMobileMenu()" class="py-2 hover:text-brand-500 border-b border-slate-200 dark:border-slate-800/80">Skills</a>
+      <a href="#research" onclick="toggleMobileMenu()" class="py-2 hover:text-brand-500 border-b border-slate-200 dark:border-slate-800/80">Research & Works</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="py-2 hover:text-brand-500">Contact</a>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="relative z-10 pt-28 sm:pt-36">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-[85vh] w-full flex items-center px-4 sm:px-8 lg:px-12 py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
+        
+        <!-- Left: Copy & Actions -->
+        <div class="lg:col-span-7 flex flex-col items-start gap-6">
+          
+          <!-- Student Status Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-amber-500/25 bg-amber-500/10 text-amber-800 dark:text-amber-400 text-xs font-semibold">
+            <i class="fa-solid fa-graduation-cap text-amber-600 dark:text-amber-400 text-xs"></i>
+            <span>B.A. (Honours) Student &bull; Islamic History & Culture</span>
+          </div>
+
+          <!-- Hero Headline & Dynamic Typing -->
+          <div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] text-slate-900 dark:text-white">
+              Hi, I'm <span class="gradient-text">Alif Yeasin Jim</span>
+            </h1>
+            <div class="text-xl sm:text-2xl font-bold text-slate-600 dark:text-slate-300 mt-2 h-9 flex items-center">
+              <span id="typedRole">Islamic History Student</span>
+              <span class="w-0.5 h-6 bg-brand-500 ml-1.5 animate-pulse"></span>
+            </div>
+          </div>
+
+          <!-- Intro Paragraph -->
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl font-normal">
+            Undergraduate student in <strong>Islamic History & Culture</strong> at <strong>Abudhar Giffari College, Dhaka</strong>. Passionate about Bengal's heritage, medieval civilization, and bringing historical stories to life through research and writing.
+          </p>
+
+          <!-- Buttons -->
+          <div class="flex flex-wrap items-center gap-3.5 pt-2">
+            <a href="#research" class="px-6 py-3 rounded-xl bg-gradient-to-r from-brand-500 to-accent-600 text-white font-bold text-xs tracking-wider uppercase hover:opacity-95 shadow-md shadow-brand-500/20 transition-all flex items-center gap-2">
+              <i class="fa-solid fa-book-open text-xs"></i>
+              <span>View Academic Work</span>
+            </a>
+            
+            <a href="#contact" class="px-6 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-white font-semibold text-xs tracking-wide hover:border-brand-500 transition-all flex items-center gap-2">
+              <i class="fa-regular fa-paper-plane text-xs text-brand-500"></i>
+              <span>Get in Touch</span>
+            </a>
+
+            <!-- Instagram Badge -->
+            <a href="https://www.instagram.com/a.y_jim?stkn=MWNheDJzNndra3pqYQ==" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-pink-500 hover:border-pink-500/40 transition-all" title="Instagram @a.y_jim">
+              <i class="fa-brands fa-instagram text-base"></i>
+            </a>
+          </div>
+
+          <!-- Quick Stats / Credentials Grid -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-4 w-full pt-4 border-t border-slate-200 dark:border-slate-800/80">
+            <div class="p-3 sm:p-4 rounded-2xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+              <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Degree</div>
+              <div class="text-sm sm:text-base font-bold text-slate-900 dark:text-white mt-0.5">B.A. (Honours)</div>
+              <div class="text-[11px] text-amber-600 dark:text-amber-400 font-medium">Undergraduate</div>
+            </div>
+
+            <div class="p-3 sm:p-4 rounded-2xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+              <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Institution</div>
+              <div class="text-sm sm:text-base font-bold text-slate-900 dark:text-white mt-0.5">Abudhar Giffari</div>
+              <div class="text-[11px] text-slate-500 font-medium">Dhaka, Bangladesh</div>
+            </div>
+
+            <div class="p-3 sm:p-4 rounded-2xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+              <div class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Major Focus</div>
+              <div class="text-sm sm:text-base font-bold text-slate-900 dark:text-white mt-0.5">Islamic History</div>
+              <div class="text-[11px] text-slate-500 font-medium">Bengal & Medieval Era</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Modern Photo Switcher Card -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="w-full max-w-[320px] xl:max-w-[340px] relative">
+            <div class="hero-orbit inset-[-9%]"></div>
+            
+            <div class="card-modern float-slow rounded-3xl p-4 sm:p-5 shadow-xl relative overflow-hidden">
+              
+              <!-- Segmented Profile Mode Switcher -->
+              <div class="flex items-center justify-between p-1 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 mb-4">
+                <button id="tabFormal" onclick="switchImage('formal')" class="flex-1 py-2 rounded-lg text-xs font-bold transition-all bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm flex items-center justify-center gap-1.5">
+                  <i class="fa-solid fa-user-tie text-[11px]"></i>
+                  <span>Academic</span>
+                </button>
+                <button id="tabCasual" onclick="switchImage('casual')" class="flex-1 py-2 rounded-lg text-xs font-bold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center justify-center gap-1.5">
+                  <i class="fa-solid fa-glasses text-[11px]"></i>
+                  <span>Modern</span>
+                </button>
+              </div>
+
+              <!-- Main Image Window -->
+              <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800">
+                <img id="photoFormal" 
+                     src="image/image1.jpg" 
+                     alt="Alif Yeasin Jim - Academic Portrait" 
+                     class="w-full h-full object-cover object-top transition-all duration-500 opacity-100 scale-100"
+                     onerror="this.src='https://placehold.co/600x750/0f172a/38bdf8?text=Alif+Yeasin+Jim'" />
+
+                <img id="photoCasual" 
+                     src="image/image2.jpg" 
+                     alt="Alif Yeasin Jim - Modern Portrait" 
+                     class="w-full h-full object-cover object-center absolute inset-0 transition-all duration-500 opacity-0 scale-95"
+                     onerror="this.src='https://placehold.co/600x750/0f172a/818cf8?text=Alif+Yeasin+Jim'" />
+              </div>
+
+              <!-- Caption -->
+              <div class="mt-4 flex items-center justify-between">
+                <div>
+                  <div id="portraitLabel" class="text-xs font-bold text-slate-900 dark:text-white">Alif Yeasin Jim</div>
+                  <div class="text-[11px] text-slate-500">Dept. of Islamic History & Culture</div>
+                </div>
+                <span class="px-2.5 py-1 rounded-md bg-brand-500/10 text-brand-500 text-[10px] font-bold uppercase tracking-wider">
+                  Verified
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 px-4 sm:px-8 lg:px-12 w-full max-w-7xl mx-auto">
+      <div class="text-left mb-12">
+        <span class="text-xs font-bold tracking-widest uppercase text-brand-500">01 / Profile Overview</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold mt-1 text-slate-900 dark:text-white">
+          About Me & My Passion for History
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <!-- Story Card (Left Column - 7 cols) -->
+        <div class="lg:col-span-7 story-card p-7 sm:p-9 rounded-3xl flex flex-col justify-between relative group">
+          <div class="relative z-10 space-y-5">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 text-xs font-semibold">
+              <i class="fa-solid fa-user-graduate"></i>
+              <span>Student Profile & Academic Interests</span>
+            </div>
+
+            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-200 leading-relaxed font-normal">
+              I am an undergraduate student currently pursuing my <strong class="text-amber-600 dark:text-amber-400 font-semibold">B.A. (Honours) in Islamic History and Culture</strong> at <strong class="text-slate-900 dark:text-white font-semibold">Abudhar Giffari College, Dhaka</strong>.
+            </p>
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+              For me, history is never just memorizing dry dates—it is about understanding real people, civilizational ideas, and how our culture evolved. I have a genuine fascination with Bengal's dynastic heritage, medieval architectural wonders, and South Asian social history.
+            </p>
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+              Whether analyzing historical documents, writing structured academic essays, or exploring heritage landmarks in person, I approach my studies with curiosity, discipline, and honest dedication.
+            </p>
+          </div>
+
+          <!-- Bottom Metadata Stats Grid -->
+          <div class="pt-6 mt-6 border-t border-slate-200/80 dark:border-white/5 grid grid-cols-2 sm:grid-cols-4 gap-3 relative z-10">
+            <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+              <div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-[11px] font-semibold uppercase tracking-wider">
+                <i class="fa-solid fa-location-dot text-amber-600 dark:text-amber-400 text-[10px]"></i>
+                <span>Location</span>
+              </div>
+              <span class="text-sm font-bold text-slate-900 dark:text-white mt-1 block">Dhaka, BD</span>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+              <div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-[11px] font-semibold uppercase tracking-wider">
+                <i class="fa-solid fa-building-columns text-amber-600 dark:text-amber-400 text-[10px]"></i>
+                <span>College</span>
+              </div>
+              <span class="text-sm font-bold text-slate-900 dark:text-white mt-1 block">Abudhar Giffari</span>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+              <div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-[11px] font-semibold uppercase tracking-wider">
+                <i class="fa-solid fa-language text-amber-600 dark:text-amber-400 text-[10px]"></i>
+                <span>Languages</span>
+              </div>
+              <span class="text-sm font-bold text-slate-900 dark:text-white mt-1 block">Bangla, English</span>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+              <div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-[11px] font-semibold uppercase tracking-wider">
+                <i class="fa-solid fa-book-open text-amber-600 dark:text-amber-400 text-[10px]"></i>
+                <span>Focus</span>
+              </div>
+              <span class="text-sm font-bold text-slate-900 dark:text-white mt-1 block">Islamic History</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Academic Interests Column (Right Column - 5 cols) -->
+        <div class="lg:col-span-5 flex flex-col justify-between gap-4">
+          
+          <div class="strength-card p-5 sm:p-6 rounded-2xl flex items-start gap-4 group">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg font-bold shrink-0 group-hover:scale-105 transition-all">
+              <i class="fa-solid fa-landmark-dome"></i>
+            </div>
+            <div>
+              <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">Bengal Dynasties & Heritage</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">Studying Sultanate and Mughal Bengal, regional culture, and architectural landmarks.</p>
+            </div>
+          </div>
+
+          <div class="strength-card p-5 sm:p-6 rounded-2xl flex items-start gap-4 group">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg font-bold shrink-0 group-hover:scale-105 transition-all">
+              <i class="fa-solid fa-book-bookmark"></i>
+            </div>
+            <div>
+              <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">Historical Source Analysis</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">Reviewing primary texts, historical chronicles, and secondary research materials.</p>
+            </div>
+          </div>
+
+          <div class="strength-card p-5 sm:p-6 rounded-2xl flex items-start gap-4 group">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg font-bold shrink-0 group-hover:scale-105 transition-all">
+              <i class="fa-solid fa-pen-fancy"></i>
+            </div>
+            <div>
+              <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">Academic & Essay Writing</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">Composing well-structured academic essays, coursework papers, and historical reviews.</p>
+            </div>
+          </div>
+
+          <div class="strength-card p-5 sm:p-6 rounded-2xl flex items-start gap-4 group">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg font-bold shrink-0 group-hover:scale-105 transition-all">
+              <i class="fa-solid fa-monument"></i>
+            </div>
+            <div>
+              <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">Field Visits & Heritage Inquiry</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">Visiting historical sites, ancient mosques, and archaeological monuments across Bengal.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EDUCATION & TIMELINE -->
+    <section id="education" class="py-20 px-4 sm:px-8 lg:px-12 w-full max-w-7xl mx-auto">
+      <div class="text-left mb-12">
+        <span class="text-xs font-bold tracking-widest uppercase text-brand-500">02 / Journey</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold mt-1 text-slate-900 dark:text-white">
+          Education & Trajectory
+        </h2>
+      </div>
+
+      <div class="timeline-container space-y-8">
+        
+        <!-- Timeline Card 1: B.A. Honours (Present / Ongoing) -->
+        <div class="education-card p-6 sm:p-8 rounded-3xl relative group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                <span>Present &bull; Ongoing</span>
+              </span>
+              <span class="text-xs sm:text-sm font-mono text-amber-300/80 font-semibold px-2.5 py-0.5 rounded-md bg-amber-950/30 border border-amber-500/20">
+                <i class="fa-regular fa-clock mr-1 text-amber-400"></i>Undergraduate
+              </span>
+            </div>
+            <div class="text-xs font-semibold text-amber-400/90 flex items-center gap-1.5">
+              <i class="fa-solid fa-graduation-cap text-amber-500"></i>
+              <span>Bachelor of Arts (Honours)</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-400 transition-colors">
+            B.A. Honours in Islamic History and Culture
+          </h3>
+
+          <div class="flex flex-wrap items-center gap-2.5 mb-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-amber-950/25 border border-amber-500/20 text-amber-300 font-semibold text-xs">
+              <i class="fa-solid fa-building-columns text-amber-500"></i>
+              <span>Abudhar Giffari College, Dhaka</span>
+            </div>
+            <span class="px-2.5 py-0.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
+              National University
+            </span>
+          </div>
+
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-4xl">
+            Pursuing undergraduate studies with an in-depth curriculum focusing on classical Islamic civilizations, the Umayyad and Abbasid caliphates, Mughal administrative governance in South Asia, regional Bengal history, and comparative historiography.
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-5 mt-5 border-t border-slate-200/80 dark:border-white/5">
+            <span class="skill-pill">#IslamicHistory</span>
+            <span class="skill-pill">#BengalSultanate</span>
+            <span class="skill-pill">#Historiography</span>
+            <span class="skill-pill">#ArchivalResearch</span>
+          </div>
+        </div>
+
+        <!-- Timeline Card 2: HSC (2023) -->
+        <div class="education-card p-6 sm:p-8 rounded-3xl relative group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                <i class="fa-solid fa-calendar-check text-[10px]"></i>
+                <span>Passing Year: 2023</span>
+              </span>
+              <span class="text-xs sm:text-sm font-mono text-amber-300/80 font-semibold px-2.5 py-0.5 rounded-md bg-amber-950/30 border border-amber-500/20">
+                <i class="fa-solid fa-award mr-1 text-amber-400"></i>GPA 3.00 / 5.00
+              </span>
+            </div>
+            <div class="text-xs font-semibold text-amber-400/90 flex items-center gap-1.5">
+              <i class="fa-solid fa-school text-amber-500"></i>
+              <span>Higher Secondary Certificate</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-400 transition-colors">
+            Higher Secondary Certificate (HSC)
+          </h3>
+
+          <div class="flex flex-wrap items-center gap-2.5 mb-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-amber-950/25 border border-amber-500/20 text-amber-300 font-semibold text-xs">
+              <i class="fa-solid fa-building-columns text-amber-500"></i>
+              <span>Government Bangabandhu College, Gopalganj</span>
+            </div>
+            <span class="px-2.5 py-0.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
+              Group: Humanities
+            </span>
+          </div>
+
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-4xl">
+            Completed higher secondary education in the Humanities division, building foundational depth in historical studies, civic systems, geography, and socio-cultural frameworks under the Dhaka Education Board.
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-5 mt-5 border-t border-slate-200/80 dark:border-white/5">
+            <span class="skill-pill">#HSC</span>
+            <span class="skill-pill">#Humanities</span>
+            <span class="skill-pill">#GovtBangabandhuCollege</span>
+            <span class="skill-pill">#Gopalganj</span>
+            <span class="skill-pill">#GPA3.00</span>
+          </div>
+        </div>
+
+        <!-- Timeline Card 3: SSC (2021) -->
+        <div class="education-card p-6 sm:p-8 rounded-3xl relative group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                <i class="fa-solid fa-calendar-check text-[10px]"></i>
+                <span>Passing Year: 2021</span>
+              </span>
+              <span class="text-xs sm:text-sm font-mono text-amber-300/80 font-semibold px-2.5 py-0.5 rounded-md bg-amber-950/30 border border-amber-500/20">
+                <i class="fa-solid fa-award mr-1 text-amber-400"></i>GPA 3.44 / 5.00
+              </span>
+            </div>
+            <div class="text-xs font-semibold text-amber-400/90 flex items-center gap-1.5">
+              <i class="fa-solid fa-book text-amber-500"></i>
+              <span>Secondary School Certificate</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-400 transition-colors">
+            Secondary School Certificate (SSC)
+          </h3>
+
+          <div class="flex flex-wrap items-center gap-2.5 mb-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-amber-950/25 border border-amber-500/20 text-amber-300 font-semibold text-xs">
+              <i class="fa-solid fa-building-columns text-amber-500"></i>
+              <span>Fukra Madan Mohan Academy</span>
+            </div>
+            <span class="px-2.5 py-0.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
+              Group: Science
+            </span>
+          </div>
+
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-4xl">
+            Successfully completed secondary schooling with concentration in General Sciences, building analytical reasoning, mathematical fundamentals, physics, chemistry, and systematic inquiry under the Dhaka Education Board.
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-5 mt-5 border-t border-slate-200/80 dark:border-white/5">
+            <span class="skill-pill">#SSC</span>
+            <span class="skill-pill">#Science</span>
+            <span class="skill-pill">#FukraAcademy</span>
+            <span class="skill-pill">#GPA3.44</span>
+          </div>
+        </div>
+
+        <!-- Timeline Card 4: JSC (2017) -->
+        <div class="education-card p-6 sm:p-8 rounded-3xl relative group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                <i class="fa-solid fa-calendar-check text-[10px]"></i>
+                <span>Passing Year: 2017</span>
+              </span>
+              <span class="text-xs sm:text-sm font-mono text-amber-300/80 font-semibold px-2.5 py-0.5 rounded-md bg-amber-950/30 border border-amber-500/20">
+                <i class="fa-solid fa-award mr-1 text-amber-400"></i>GPA 2.57 / 5.00
+              </span>
+            </div>
+            <div class="text-xs font-semibold text-amber-400/90 flex items-center gap-1.5">
+              <i class="fa-solid fa-certificate text-amber-500"></i>
+              <span>Junior School Certificate</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-400 transition-colors">
+            Junior School Certificate (JSC)
+          </h3>
+
+          <div class="flex flex-wrap items-center gap-2.5 mb-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-amber-950/25 border border-amber-500/20 text-amber-300 font-semibold text-xs">
+              <i class="fa-solid fa-building-columns text-amber-500"></i>
+              <span>Fukra Madan Mohan Academy</span>
+            </div>
+          </div>
+
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-4xl">
+            Completed junior secondary level education under the national board curriculum with core emphasis on Bengali, English, foundational mathematics, general science, and introductory social studies.
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-5 mt-5 border-t border-slate-200/80 dark:border-white/5">
+            <span class="skill-pill">#JSC</span>
+            <span class="skill-pill">#FukraAcademy</span>
+            <span class="skill-pill">#JuniorSecondary</span>
+            <span class="skill-pill">#GPA2.57</span>
+          </div>
+        </div>
+
+        <!-- Timeline Card 5: PSC (2014) -->
+        <div class="education-card p-6 sm:p-8 rounded-3xl relative group">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                <i class="fa-solid fa-calendar-check text-[10px]"></i>
+                <span>Passing Year: 2014</span>
+              </span>
+              <span class="text-xs sm:text-sm font-mono text-amber-300/80 font-semibold px-2.5 py-0.5 rounded-md bg-amber-950/30 border border-amber-500/20">
+                <i class="fa-solid fa-award mr-1 text-amber-400"></i>GPA 4.00 / 5.00
+              </span>
+            </div>
+            <div class="text-xs font-semibold text-amber-400/90 flex items-center gap-1.5">
+              <i class="fa-solid fa-shapes text-amber-500"></i>
+              <span>Primary School Certificate</span>
+            </div>
+          </div>
+
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-amber-400 transition-colors">
+            Primary School Certificate (PSC)
+          </h3>
+
+          <div class="flex flex-wrap items-center gap-2.5 mb-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-amber-950/25 border border-amber-500/20 text-amber-300 font-semibold text-xs">
+              <i class="fa-solid fa-building-columns text-amber-500"></i>
+              <span>No. 50 Fukra Government Primary School</span>
+            </div>
+          </div>
+
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-4xl">
+            Successfully completed primary education with outstanding academic distinction, achieving GPA 4.00 in the nationwide Primary School Certificate examination.
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-5 mt-5 border-t border-slate-200/80 dark:border-white/5">
+            <span class="skill-pill">#PSC</span>
+            <span class="skill-pill">#PrimaryEducation</span>
+            <span class="skill-pill">#FukraGovtPrimary</span>
+            <span class="skill-pill">#GPA4.00</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS & COMPETENCIES -->
+    <section id="skills" class="py-20 px-4 sm:px-8 lg:px-12 w-full max-w-7xl mx-auto">
+      <div class="text-left mb-12">
+        <span class="text-xs font-bold tracking-widest uppercase text-brand-500">03 / Competencies</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+          Academic & Research Skills
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2 max-w-xl">
+          Core competencies developed through university coursework, archival reading, essay writing, and heritage inquiries.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+
+        <!-- Skill 1 -->
+        <div class="skill-card p-4.5 sm:p-5 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-3.5">
+              <div class="skill-icon-box">
+                <i class="fa-solid fa-book-open"></i>
+              </div>
+              <div class="skill-badge">
+                <i class="fa-solid fa-star text-[9px] text-amber-500"></i>
+                <span>Core Field</span>
+              </div>
+            </div>
+            <h4 class="font-bold text-base text-slate-900 dark:text-white mb-1.5 group-hover:text-amber-500 transition-colors">Historical Research & Inquiry</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-light mb-3">
+              Investigating historical chronicles, reviewing primary documents, and synthesizing multi-period secondary literature.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-3.5">
+              <span class="skill-pill">Primary Sources</span>
+              <span class="skill-pill">Historiography</span>
+              <span class="skill-pill">Comparative Study</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-200/60 dark:border-white/5 flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+            <i class="fa-solid fa-check text-amber-600 dark:text-amber-400 text-xs"></i>
+            <span>University coursework & independent reading</span>
+          </div>
+        </div>
+
+        <!-- Skill 2 -->
+        <div class="skill-card p-4.5 sm:p-5 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-3.5">
+              <div class="skill-icon-box">
+                <i class="fa-solid fa-scroll"></i>
+              </div>
+              <div class="skill-badge">
+                <i class="fa-solid fa-file-lines text-[9px] text-amber-500"></i>
+                <span>Archival</span>
+              </div>
+            </div>
+            <h4 class="font-bold text-base text-slate-900 dark:text-white mb-1.5 group-hover:text-amber-500 transition-colors">Archival & Document Study</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-light mb-3">
+              Contextualizing historic documents, understanding script evolution, and cross-checking records for authenticity.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-3.5">
+              <span class="skill-pill">Archival Records</span>
+              <span class="skill-pill">Source Verification</span>
+              <span class="skill-pill">Historical Context</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-200/60 dark:border-white/5 flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+            <i class="fa-solid fa-check text-amber-600 dark:text-amber-400 text-xs"></i>
+            <span>Document critique & catalog verification</span>
+          </div>
+        </div>
+
+        <!-- Skill 3 -->
+        <div class="skill-card p-4.5 sm:p-5 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-3.5">
+              <div class="skill-icon-box">
+                <i class="fa-solid fa-pen-nib"></i>
+              </div>
+              <div class="skill-badge">
+                <i class="fa-solid fa-pen-fancy text-[9px] text-amber-500"></i>
+                <span>Writing</span>
+              </div>
+            </div>
+            <h4 class="font-bold text-base text-slate-900 dark:text-white mb-1.5 group-hover:text-amber-500 transition-colors">Academic & Essay Writing</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-light mb-3">
+              Composing structured essays, term papers, analytical chapter summaries, and engaging historical narratives.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-3.5">
+              <span class="skill-pill">Academic Essays</span>
+              <span class="skill-pill">Monograph Reviews</span>
+              <span class="skill-pill">Clear Exposition</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-200/60 dark:border-white/5 flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+            <i class="fa-solid fa-check text-amber-600 dark:text-amber-400 text-xs"></i>
+            <span>College papers & research essay submissions</span>
+          </div>
+        </div>
+
+        <!-- Skill 4 -->
+        <div class="skill-card p-4.5 sm:p-5 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-3.5">
+              <div class="skill-icon-box">
+                <i class="fa-solid fa-landmark-dome"></i>
+              </div>
+              <div class="skill-badge">
+                <i class="fa-solid fa-certificate text-[9px] text-amber-500"></i>
+                <span>Major Subject</span>
+              </div>
+            </div>
+            <h4 class="font-bold text-base text-slate-900 dark:text-white mb-1.5 group-hover:text-amber-500 transition-colors">Islamic History & Civilizations</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-light mb-3">
+              Deep study of early Islamic caliphates, regional Sultanates, Bengal's political history, and societal transformations.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-3.5">
+              <span class="skill-pill">Bengal Sultanate</span>
+              <span class="skill-pill">Mughal Era</span>
+              <span class="skill-pill">Polity & Culture</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-200/60 dark:border-white/5 flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+            <i class="fa-solid fa-check text-amber-600 dark:text-amber-400 text-xs"></i>
+            <span>Core B.A. Honours academic curriculum</span>
+          </div>
+        </div>
+
+        <!-- Skill 5 -->
+        <div class="skill-card p-4.5 sm:p-5 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-3.5">
+              <div class="skill-icon-box">
+                <i class="fa-solid fa-monument"></i>
+              </div>
+              <div class="skill-badge">
+                <i class="fa-solid fa-compass text-[9px] text-amber-500"></i>
+                <span>Field Inquiry</span>
+              </div>
+            </div>
+            <h4 class="font-bold text-base text-slate-900 dark:text-white mb-1.5 group-hover:text-amber-500 transition-colors">Heritage Sites & Field Inquiry</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-light mb-3">
+              Observing architectural heritage, terracotta ornamentation, and field conditions across historic mosques and monuments.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-3.5">
+              <span class="skill-pill">Architectural Styles</span>
+              <span class="skill-pill">Site Observations</span>
+              <span class="skill-pill">Terracotta Motifs</span>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-200/60 dark:border-white/5 flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+            <i class="fa-solid fa-check text-amber-600 dark:text-amber-400 text-xs"></i>
+            <span>Site visits & architectural documentation</span>
+          </div>
+        </div>
+
+        <!-- Skill 6: Languages -->
+        <div class="skill-card p-4.5 sm:p-5 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-3.5">
+              <div class="skill-icon-box">
+                <i class="fa-solid fa-language"></i>
+              </div>
+              <div class="skill-badge">
+                <i class="fa-solid fa-globe text-[9px] text-amber-500"></i>
+                <span>Bilingual</span>
+              </div>
+            </div>
+            <h4 class="font-bold text-base text-slate-900 dark:text-white mb-1.5 group-hover:text-amber-500 transition-colors">Bilingual Academic Communication</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-light mb-3">
+              Clear expression across native Bangla and academic English for research literature and educational discourse.
+            </p>
+
+            <div class="flex flex-wrap gap-1 mb-3.5">
+              <span class="skill-pill">Bengali (Native)</span>
+              <span class="skill-pill">English (Academic)</span>
+              <span class="skill-pill">Arabic Epigraphy Basics</span>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-200/60 dark:border-white/5 flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+            <i class="fa-solid fa-check text-amber-600 dark:text-amber-400 text-xs"></i>
+            <span>Bilingual source reading & essay writing</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEATURED RESEARCH & WORKS -->
+    <section id="research" class="py-20 px-4 sm:px-8 lg:px-12 w-full max-w-7xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="text-xs font-bold tracking-widest uppercase text-brand-500">04 / Portfolio</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold mt-1 text-slate-900 dark:text-white">
+            Featured Research & Essays
+          </h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-sm">
+          Academic papers, historical studies, and essays on Bengal and Islamic civilization.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Project 1 -->
+        <div onclick="openProject(1)" class="research-card p-6 rounded-3xl group cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="dossier-banner bg-gradient-to-tr from-slate-900 via-slate-800 to-amber-950/30">
+              <span class="absolute top-3 left-3 text-[10px] font-mono font-bold tracking-widest uppercase text-amber-500/90 bg-black/60 px-2.5 py-0.5 rounded-full border border-amber-500/20">
+                Paper &bull; 01
+              </span>
+              <div class="banner-icon w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/25 text-amber-500 flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-105 group-hover:text-amber-400">
+                <i class="fa-solid fa-scroll"></i>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full">
+                Research Paper
+              </span>
+              <span class="text-xs font-mono text-slate-400">
+                <i class="fa-regular fa-calendar mr-1 text-amber-500"></i>2024
+              </span>
+            </div>
+
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors mb-2 leading-snug">
+              Socio-Cultural Evolution in Medieval South Asia
+            </h3>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed">
+              An analytical exploration of the administrative, agrarian, and cultural integration during the Delhi Sultanate and the subsequent rise of independent regional dynasties.
+            </p>
+          </div>
+
+          <div class="pt-4 mt-6 border-t border-slate-200/80 dark:border-white/5 flex items-center justify-between text-xs font-semibold text-amber-600 dark:text-amber-400">
+            <span class="flex items-center gap-1.5 text-[11px] text-slate-400 font-normal">
+              <i class="fa-regular fa-clock text-amber-500"></i>8 min read
+            </span>
+            <span class="flex items-center gap-1 group-hover:translate-x-1 transition-transform font-bold">
+              <span>Read Overview</span>
+              <i class="fa-solid fa-arrow-right text-[11px]"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div onclick="openProject(2)" class="research-card p-6 rounded-3xl group cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="dossier-banner bg-gradient-to-tr from-slate-900 via-slate-800 to-amber-950/30">
+              <span class="absolute top-3 left-3 text-[10px] font-mono font-bold tracking-widest uppercase text-amber-500/90 bg-black/60 px-2.5 py-0.5 rounded-full border border-amber-500/20">
+                Study &bull; 02
+              </span>
+              <div class="banner-icon w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/25 text-amber-500 flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-105 group-hover:text-amber-400">
+                <i class="fa-solid fa-landmark-dome"></i>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full">
+                Historiography
+              </span>
+              <span class="text-xs font-mono text-slate-400">
+                <i class="fa-regular fa-calendar mr-1 text-amber-500"></i>2024
+              </span>
+            </div>
+
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors mb-2 leading-snug">
+              Historiographical Analysis of Bengal Dynasties
+            </h3>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed">
+              Reviewing the Ilyas Shahi and Husain Shahi periods, evaluating how architecture, terracotta art, and mint towns defined medieval Bengal's independent sovereignty.
+            </p>
+          </div>
+
+          <div class="pt-4 mt-6 border-t border-slate-200/80 dark:border-white/5 flex items-center justify-between text-xs font-semibold text-amber-600 dark:text-amber-400">
+            <span class="flex items-center gap-1.5 text-[11px] text-slate-400 font-normal">
+              <i class="fa-regular fa-clock text-amber-500"></i>12 min read
+            </span>
+            <span class="flex items-center gap-1 group-hover:translate-x-1 transition-transform font-bold">
+              <span>Read Overview</span>
+              <i class="fa-solid fa-arrow-right text-[11px]"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div onclick="openProject(3)" class="research-card p-6 rounded-3xl group cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="dossier-banner bg-gradient-to-tr from-slate-900 via-slate-800 to-amber-950/30">
+              <span class="absolute top-3 left-3 text-[10px] font-mono font-bold tracking-widest uppercase text-amber-500/90 bg-black/60 px-2.5 py-0.5 rounded-full border border-amber-500/20">
+                Essay &bull; 03
+              </span>
+              <div class="banner-icon w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/25 text-amber-500 flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-105 group-hover:text-amber-400">
+                <i class="fa-solid fa-newspaper"></i>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full">
+                Article & Media
+              </span>
+              <span class="text-xs font-mono text-slate-400">
+                <i class="fa-regular fa-calendar mr-1 text-amber-500"></i>2024
+              </span>
+            </div>
+
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors mb-2 leading-snug">
+              Cultural Preservation & Contemporary Media
+            </h3>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed">
+              Investigating how digital archives, modern documentation, and digital storytelling can bridge historic manuscripts with modern generations.
+            </p>
+          </div>
+
+          <div class="pt-4 mt-6 border-t border-slate-200/80 dark:border-white/5 flex items-center justify-between text-xs font-semibold text-amber-600 dark:text-amber-400">
+            <span class="flex items-center gap-1.5 text-[11px] text-slate-400 font-normal">
+              <i class="fa-regular fa-clock text-amber-500"></i>6 min read
+            </span>
+            <span class="flex items-center gap-1 group-hover:translate-x-1 transition-transform font-bold">
+              <span>Read Overview</span>
+              <i class="fa-solid fa-arrow-right text-[11px]"></i>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 px-4 sm:px-8 lg:px-12 w-full">
+      <div class="card-modern rounded-3xl p-8 sm:p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
+          <!-- Contact Info -->
+          <div class="lg:col-span-5 flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-bold tracking-widest uppercase text-brand-500">05 / Get in Touch</span>
+              <h2 class="text-3xl sm:text-4xl font-extrabold mt-1 text-slate-900 dark:text-white">
+                Let's Discuss History & Ideas
+              </h2>
+              <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mt-3 leading-relaxed">
+                Feel free to reach out for research discussions, academic inquiries, or creative writing collaborations.
+              </p>
+
+              <!-- Fast Contact Badges -->
+              <div class="mt-8 space-y-3">
+                
+                <!-- Email -->
+                <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-xs">
+                      <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-slate-400 font-semibold uppercase">Email</div>
+                      <a href="mailto:ayjim441@gmail.com" class="text-xs sm:text-sm font-semibold hover:text-brand-500 transition-colors">
+                        ayjim441@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                  <button onclick="copyInfo('ayjim441@gmail.com', 'Email copied!')" class="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+                    <i class="fa-regular fa-copy text-xs"></i>
+                  </button>
+                </div>
+
+                <!-- Phone / WhatsApp -->
+                <div class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xs">
+                      <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-slate-400 font-semibold uppercase">Phone / WhatsApp</div>
+                      <a href="tel:01603806413" class="text-xs sm:text-sm font-semibold hover:text-emerald-500 transition-colors">
+                        01603806413
+                      </a>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <a href="https://wa.me/8801603806413" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-emerald-500/10 text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all text-xs">
+                      <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                    <button onclick="copyInfo('01603806413', 'Phone copied!')" class="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+                      <i class="fa-regular fa-copy text-xs"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/a.y_jim?stkn=MWNheDJzNndra3pqYQ==" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-2xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-center justify-between group hover:border-pink-500/40 transition-all">
+                  <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-pink-500/10 text-pink-500 flex items-center justify-center text-xs">
+                      <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div>
+                      <div class="text-[10px] text-slate-400 font-semibold uppercase">Instagram</div>
+                      <span class="text-xs sm:text-sm font-semibold group-hover:text-pink-500 transition-colors">@a.y_jim</span>
+                    </div>
+                  </div>
+                  <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-pink-500"></i>
+                </a>
+
+              </div>
+            </div>
+
+            <div class="text-xs text-slate-400 mt-6 pt-4 border-t border-slate-200 dark:border-slate-800">
+              Dhaka, Bangladesh &bull; Response time: within 24 hours.
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="lg:col-span-7">
+            <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleContactSubmit(event)" class="space-y-4">
+              <!-- Web3Forms Access Key for ayjim441@gmail.com -->
+              <input type="hidden" name="access_key" id="web3AccessKey" value="96d77c17-6389-4e27-8649-1439b8300472" />
+              <input type="hidden" name="from_name" value="Jim Portfolio Contact" />
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-500 uppercase mb-2">Name</label>
+                  <input type="text" name="name" required placeholder="Your Name" class="w-full px-4 py-3 rounded-xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-brand-500 transition-colors" />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-500 uppercase mb-2">Email</label>
+                  <input type="email" name="email" required placeholder="you@domain.com" class="w-full px-4 py-3 rounded-xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-brand-500 transition-colors" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-500 uppercase mb-2">Subject</label>
+                <input type="text" name="subject" required placeholder="Academic Collaboration / Inquiry" class="w-full px-4 py-3 rounded-xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-brand-500 transition-colors" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-500 uppercase mb-2">Message</label>
+                <textarea rows="4" name="message" required placeholder="Write your message here..." class="w-full px-4 py-3 rounded-xl bg-slate-100/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-brand-500 transition-colors"></textarea>
+              </div>
+
+              <button id="submitBtn" type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-500 to-accent-600 text-white font-bold text-xs uppercase tracking-wider hover:opacity-95 shadow-md shadow-brand-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-regular fa-paper-plane text-xs"></i>
+                <span id="submitBtnText">Send Message</span>
+              </button>
+            </form>
+
+            <div id="formSuccess" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-medium text-center">
+              Message sent successfully! Thank you for getting in touch.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RESEARCH OVERVIEW MODAL -->
+  <div id="researchModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+    <div class="card-modern max-w-xl w-full rounded-3xl p-8 relative max-h-[85vh] overflow-y-auto">
+      <button onclick="closeModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full border border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+
+      <span id="modalCategory" class="text-xs font-bold text-brand-500 uppercase tracking-wider">Academic Overview</span>
+      <h3 id="modalTitle" class="text-xl font-bold mt-1 mb-4 text-slate-900 dark:text-white">Project Title</h3>
+      
+      <div id="modalBody" class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-3 leading-relaxed">
+        <!-- Loaded via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODERN MINIMAL FOOTER -->
+  <footer class="border-t border-slate-200 dark:border-slate-800/80 py-8 px-4 sm:px-8 relative z-10 bg-slate-50/50 dark:bg-slate-950/40 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-500">
+      
+      <!-- Left: Jim's Avatar with image1.jpg + Name -->
+      <div class="flex items-center gap-3">
+        <img src="image/image1.jpg" alt="Alif Yeasin Jim" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/40 shadow-sm" />
+        <div class="text-left">
+          <div class="font-bold text-slate-800 dark:text-slate-100 text-sm">Alif Yeasin Jim</div>
+          <div class="text-[11px] text-slate-400 font-medium">Islamic History &bull; Portfolio</div>
+        </div>
+      </div>
+
+      <!-- Center: Dynamic Auto-updating Copyright -->
+      <div class="text-center font-medium text-slate-500 dark:text-slate-400">
+        &copy; <span id="currentYear">2026</span> Alif Yeasin Jim. All rights reserved.
+      </div>
+
+      <!-- Right: Social Links with Icons -->
+      <div class="flex items-center flex-wrap justify-center sm:justify-end gap-2.5">
+        <a href="https://www.instagram.com/a.y_jim?stkn=MWNheDJzNndra3pqYQ==" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:text-pink-500 hover:border-pink-500/40 text-slate-600 dark:text-slate-300 transition-all font-medium shadow-sm hover:-translate-y-0.5" title="Instagram @a.y_jim">
+          <i class="fa-brands fa-instagram text-pink-500 text-xs"></i>
+          <span>Instagram</span>
+        </a>
+        <a href="mailto:ayjim441@gmail.com" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:text-amber-500 hover:border-amber-500/40 text-slate-600 dark:text-slate-300 transition-all font-medium shadow-sm hover:-translate-y-0.5" title="Email ayjim441@gmail.com">
+          <i class="fa-solid fa-envelope text-amber-500 text-xs"></i>
+          <span>Email</span>
+        </a>
+        <a href="tel:01603806413" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:text-emerald-500 hover:border-emerald-500/40 text-slate-600 dark:text-slate-300 transition-all font-medium shadow-sm hover:-translate-y-0.5" title="Call 01603806413">
+          <i class="fa-solid fa-phone text-emerald-500 text-xs"></i>
+          <span>Phone</span>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- FLOATING SCROLL TO TOP BUTTON -->
+  <button id="scrollTopBtn" onclick="scrollToTop()" aria-label="Scroll to top" class="fixed bottom-6 right-6 z-40 w-11 h-11 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white shadow-lg shadow-amber-500/30 flex items-center justify-center opacity-0 pointer-events-none translate-y-4 transition-all duration-300 hover:scale-105 active:scale-95 border border-amber-400/40 group cursor-pointer" title="Back to top">
+    <i class="fa-solid fa-arrow-up text-sm transition-transform group-hover:-translate-y-0.5"></i>
+  </button>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // 1. Current Year (Auto-updates every year dynamically)
+    const yearEl = document.getElementById('currentYear');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+
+    // Scroll to Top Button Logic
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    if (scrollTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+          scrollTopBtn.classList.add('opacity-100', 'translate-y-0');
+        } else {
+          scrollTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+          scrollTopBtn.classList.remove('opacity-100', 'translate-y-0');
+        }
+      }, { passive: true });
+    }
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // 2. Typing Headline Effect
+    const roles = [
+      "Islamic History & Culture Student",
+      "Academic Writer & Researcher",
+      "Bengal Heritage Enthusiast",
+      "Historical Storyteller"
+    ];
+    let roleIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    const typeSpeed = 80;
+    const typedElem = document.getElementById('typedRole');
+
+    function typeLoop() {
+      const currentRole = roles[roleIdx];
+      if (isDeleting) {
+        typedElem.textContent = currentRole.substring(0, charIdx - 1);
+        charIdx--;
+      } else {
+        typedElem.textContent = currentRole.substring(0, charIdx + 1);
+        charIdx++;
+      }
+
+      let speed = typeSpeed;
+      if (isDeleting) speed /= 2;
+
+      if (!isDeleting && charIdx === currentRole.length) {
+        speed = 1800; // pause at end
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+        speed = 400;
+      }
+
+      setTimeout(typeLoop, speed);
+    }
+    typeLoop();
+
+    // 3. Theme Toggle (Light / Dark)
+    function setTheme(dark) {
+      const root = document.documentElement;
+      const icon = document.getElementById('themeIcon');
+      if (dark) {
+        root.classList.add('dark');
+        icon.className = 'fa-solid fa-sun text-xs text-amber-400';
+      } else {
+        root.classList.remove('dark');
+        icon.className = 'fa-solid fa-moon text-xs text-slate-700';
+      }
+      localStorage.setItem('portfolio_theme', dark ? 'dark' : 'light');
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(!isDark);
+      showToast(!isDark ? "Dark theme activated" : "Light theme activated");
+    }
+
+    const savedTheme = localStorage.getItem('portfolio_theme') || 'dark';
+    setTheme(savedTheme === 'dark');
+
+    // 4. Dual Image Switcher
+    function switchImage(mode) {
+      const photoFormal = document.getElementById('photoFormal');
+      const photoCasual = document.getElementById('photoCasual');
+      const tabFormal = document.getElementById('tabFormal');
+      const tabCasual = document.getElementById('tabCasual');
+      const label = document.getElementById('portraitLabel');
+
+      if (mode === 'casual') {
+        photoFormal.classList.remove('opacity-100', 'scale-100');
+        photoFormal.classList.add('opacity-0', 'scale-95');
+
+        photoCasual.classList.remove('opacity-0', 'scale-95');
+        photoCasual.classList.add('opacity-100', 'scale-100');
+
+        tabCasual.className = 'flex-1 py-2 rounded-lg text-xs font-bold transition-all bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm flex items-center justify-center gap-1.5';
+        tabFormal.className = 'flex-1 py-2 rounded-lg text-xs font-bold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center justify-center gap-1.5';
+
+        label.textContent = "Alif Yeasin Jim (Lifestyle / Modern)";
+        showToast("Switched to Modern Portrait");
+      } else {
+        photoCasual.classList.remove('opacity-100', 'scale-100');
+        photoCasual.classList.add('opacity-0', 'scale-95');
+
+        photoFormal.classList.remove('opacity-0', 'scale-95');
+        photoFormal.classList.add('opacity-100', 'scale-100');
+
+        tabFormal.className = 'flex-1 py-2 rounded-lg text-xs font-bold transition-all bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm flex items-center justify-center gap-1.5';
+        tabCasual.className = 'flex-1 py-2 rounded-lg text-xs font-bold transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center justify-center gap-1.5';
+
+        label.textContent = "Alif Yeasin Jim (Academic Formal)";
+        showToast("Switched to Academic Portrait");
+      }
+    }
+
+    // 5. Toast Feedback
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3000);
+    }
+
+    // 6. Copy to Clipboard
+    function copyInfo(val, text) {
+      const temp = document.createElement("input");
+      document.body.appendChild(temp);
+      temp.value = val;
+      temp.select();
+      try {
+        document.execCommand("copy");
+        showToast(text || "Copied to clipboard!");
+      } catch (e) {
+        showToast("Copy failed");
+      }
+      document.body.removeChild(temp);
+    }
+
+    // 7. Research Modal Content
+    const projectData = {
+      1: {
+        category: "Historical Research & Archival Paper",
+        title: "Socio-Cultural Evolution in Medieval South Asia",
+        body: `
+          <p>This research paper examines the cross-cultural synthesis across South Asia from the 12th to the 16th century CE, focusing on the administrative apparatus and social integration under the Sultanates.</p>
+          <p><strong>Primary Focus Areas:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Agrarian revenue administration and urban market networks.</li>
+            <li>Interaction between Persian courtly bureaucracy and indigenous traditions.</li>
+            <li>The role of Sufi Khanqahs in regional peace-building and literacy.</li>
+          </ul>
+        `
+      },
+      2: {
+        category: "Manuscript & Literary Review",
+        title: "Historiographical Analysis of Bengal Dynasties",
+        body: `
+          <p>An in-depth historiographical critique evaluating epigraphic records, coin mints, and literary accounts of the Bengal Sultanate.</p>
+          <p><strong>Methodological Highlights:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Numismatic analysis of Ilyas Shahi coins discovered across Sonargaon and Pandua.</li>
+            <li>Evaluation of Arabic Tughra calligraphy on regional terracotta mosques.</li>
+            <li>Cross-referencing court chronologies with Ming Chinese travel accounts.</li>
+          </ul>
+        `
+      },
+      3: {
+        category: "Article & Contemporary Media",
+        title: "Cultural Preservation & Contemporary Media",
+        body: `
+          <p>An inquiry into how modern digital tools, 3D photogrammetry, and content writing can protect endangered South Asian historical artifacts from oblivion.</p>
+          <p><strong>Core Takeaways:</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Digital archiving of delicate palm leaf and rag paper manuscripts.</li>
+            <li>Promoting historical literacy to younger generations via modern visual media.</li>
+            <li>Bridging academic history with public intellectual discussion.</li>
+          </ul>
+        `
+      }
+    };
+
+    function openProject(id) {
+      const data = projectData[id];
+      if (!data) return;
+      document.getElementById('modalCategory').textContent = data.category;
+      document.getElementById('modalTitle').textContent = data.title;
+      document.getElementById('modalBody').innerHTML = data.body;
+      const modal = document.getElementById('researchModal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('researchModal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    document.getElementById('researchModal').addEventListener('click', (e) => {
+      if (e.target.id === 'researchModal') closeModal();
+    });
+
+    // 8. Contact Form Submission (Directly sends emails to ayjim441@gmail.com via Web3Forms)
+    async function handleContactSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = document.getElementById('submitBtn');
+      const msgBox = document.getElementById('formSuccess');
+
+      const originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i> <span>Sending to Gmail...</span>';
+      }
+
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: json
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (response.status === 200 && result.success) {
+          msgBox.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Message sent directly to Alif Yeasin Jim! Check your Gmail inbox.';
+          msgBox.classList.remove('hidden');
+          form.reset();
+          showToast("Message delivered directly to your Gmail!");
+        } else {
+          // Fallback if needed
+          form.submit();
+        }
+      } catch (error) {
+        // Reliable native fallback
+        form.submit();
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHTML;
+        }
+        setTimeout(() => { msgBox.classList.add('hidden'); }, 7000);
+      }
+    }
+
+    // 9. Mobile Menu
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    // 10. Live motion and responsive scroll effects
+    const motionReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nav = document.querySelector('header');
+
+    if (!motionReduced) {
+      const revealItems = document.querySelectorAll('main section, .card-modern');
+      revealItems.forEach((item, index) => {
+        item.classList.add('reveal');
+        if (item.closest('#hero') && item.classList.contains('card-modern')) {
+          item.classList.add('reveal-left');
+        }
+        item.style.transitionDelay = `${Math.min(index % 5, 4) * 70}ms`;
+      });
+
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+
+      document.addEventListener('pointermove', (event) => {
+        document.documentElement.style.setProperty('--pointer-x', `${event.clientX}px`);
+        document.documentElement.style.setProperty('--pointer-y', `${event.clientY}px`);
+      }, { passive: true });
+    } else {
+      document.querySelectorAll('main section, .card-modern').forEach((item) => item.classList.add('is-visible'));
+    }
+
+    const updateNavState = () => {
+      nav.classList.toggle('nav-scrolled', window.scrollY > 24);
+    };
+    updateNavState();
+    window.addEventListener('scroll', updateNavState, { passive: true });
+
+    const sectionTitles = {
+      hero: "Portfolio",
+      about: "About",
+      education: "Education",
+      skills: "Skills",
+      research: "Research & Works",
+      contact: "Contact"
+    };
+
+    const navLinks = [...document.querySelectorAll('header nav a, #mobileMenu a')];
+    const sectionIds = ['hero', 'about', 'education', 'skills', 'research', 'contact'];
+    const pageSections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    let currentSectionId = '';
+
+    const updateActiveNav = () => {
+      const marker = window.scrollY + Math.min(window.innerHeight * 0.35, 300);
+      let activeSection = pageSections[0];
+
+      // Check sections from top to bottom
+      pageSections.forEach((section) => {
+        if (section.offsetTop <= marker) {
+          activeSection = section;
+        }
+      });
+
+      // Special check if reached bottom of page
+      if ((window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 60)) {
+        activeSection = document.getElementById('contact') || activeSection;
+      }
+
+      const activeId = activeSection ? activeSection.id : 'hero';
+
+      navLinks.forEach((link) => {
+        const href = link.getAttribute('href');
+        link.classList.toggle('is-active', href === `#${activeId}`);
+      });
+
+      // Dynamically update browser tab title
+      if (activeId !== currentSectionId) {
+        currentSectionId = activeId;
+        const name = sectionTitles[activeId] || 'Portfolio';
+        document.title = `Alif Yeasin Jim — ${name}`;
+      }
+    };
+    updateActiveNav();
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+    if (!motionReduced && window.matchMedia('(pointer: fine)').matches) {
+      document.querySelectorAll('.card-modern').forEach((card) => {
+        card.addEventListener('pointermove', (event) => {
+          const bounds = card.getBoundingClientRect();
+          const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+          const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+          card.style.transform = `perspective(900px) rotateX(${y * -3}deg) rotateY(${x * 3}deg) translateY(-7px)`;
+        });
+        card.addEventListener('pointerleave', () => {
+          card.style.transform = '';
+        });
+      });
+    }
+
+    // --------------------------------------------------
+    // Fluid Interactive Mouse Cursor Follower Animation
+    // --------------------------------------------------
+    (function setupCursorFollower() {
+      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      if (!dot || !ring) return;
+
+      let mouseX = -100;
+      let mouseY = -100;
+      let ringX = -100;
+      let ringY = -100;
+      let isVisible = false;
+
+      window.addEventListener('pointermove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Instant response for leading center dot
+        dot.style.left = `${mouseX}px`;
+        dot.style.top = `${mouseY}px`;
+
+        if (!isVisible) {
+          isVisible = true;
+          dot.style.opacity = '1';
+          ring.style.opacity = '1';
+          ringX = mouseX;
+          ringY = mouseY;
+        }
+      }, { passive: true });
+
+      // Smooth physics loop for outer follower ring (linear interpolation)
+      function animateCursor() {
+        if (isVisible) {
+          ringX += (mouseX - ringX) * 0.18;
+          ringY += (mouseY - ringY) * 0.18;
+          ring.style.left = `${ringX}px`;
+          ring.style.top = `${ringY}px`;
+        }
+        requestAnimationFrame(animateCursor);
+      }
+      requestAnimationFrame(animateCursor);
+
+      document.addEventListener('mouseleave', () => {
+        isVisible = false;
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+
+      document.addEventListener('mouseenter', () => {
+        isVisible = true;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+      });
+
+      window.addEventListener('mousedown', () => {
+        document.body.classList.add('cursor-active');
+      });
+      window.addEventListener('mouseup', () => {
+        document.body.classList.remove('cursor-active');
+      });
+
+      const interactiveSelector = 'a, button, input, textarea, select, [onclick], .card-modern, .story-card, .strength-card, .education-card, .skill-card, .research-card';
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(interactiveSelector)) {
+          document.body.classList.add('cursor-hover');
+        }
+      });
+      document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(interactiveSelector)) {
+          document.body.classList.remove('cursor-hover');
+        }
+      });
+    })();
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
